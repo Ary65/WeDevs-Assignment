@@ -3,23 +3,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:wedevs_assignment/features/auth/services/auth_services.dart';
-import 'package:wedevs_assignment/providers/logged_in_provider.dart';
 import 'package:wedevs_assignment/utils/loader.dart';
-import 'package:wedevs_assignment/utils/secured_storage_util.dart';
+
 import 'package:wedevs_assignment/utils/snackbar_util.dart';
 
-final loginViewModelProvider =
-    ChangeNotifierProvider((ref) => LoginViewModel());
+final signUpViewModelProvider =
+    ChangeNotifierProvider((ref) => SignUpViewModel());
 
-class LoginViewModel extends ChangeNotifier {
+class SignUpViewModel extends ChangeNotifier {
   final AuthServices _authServices = AuthServices();
   final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final String _errorString = "";
   bool _obscurePass = true;
+  GlobalKey<FormState> registerKey = GlobalKey<FormState>();
 
-  GlobalKey<FormState> loginKey = GlobalKey<FormState>();
   TextEditingController get usernameController => _usernameController;
+  TextEditingController get emailController => _emailController;
   TextEditingController get passwordController => _passwordController;
   String get errorString => _errorString;
   bool get obscurePass => _obscurePass;
@@ -37,6 +38,14 @@ class LoginViewModel extends ChangeNotifier {
     return null;
   }
 
+  String? validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Email is required";
+    }
+
+    return null;
+  }
+
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
       return "Password is required";
@@ -46,27 +55,24 @@ class LoginViewModel extends ChangeNotifier {
     return null;
   }
 
-  void login(WidgetRef ref, BuildContext context) async {
+  void signUp(WidgetRef ref, BuildContext context) async {
     LoaderClass.showLoadingDialog(context, 'Loading');
 
-    final token = await _authServices.loginUser(
-      username: _usernameController.text,
-      password: _passwordController.text,
-      context: context,
-      ref: ref,
+    final success = await _authServices.registerUser(
+      _usernameController.text,
+      _emailController.text,
+      _passwordController.text,
     );
 
-    if (token != null) {
-      SecureStorageUtil.setToken(token);
+    if (success) {
       if (context.mounted) {
         context.pop(true);
-        GoRouter.of(context).pushReplacement('/');
-        ref.invalidate(isLoggedInProvider);
-        SnackBarUtil.showSuccessSnackBar(context, 'Login successful!');
+        GoRouter.of(context).pushReplacement('/login');
+        SnackBarUtil.showSuccessSnackBar(context, 'Registration successful!');
       }
     } else {
       if (context.mounted) {
-        SnackBarUtil.showErrorSnackBar(context, 'Login failed!');
+        SnackBarUtil.showErrorSnackBar(context, 'Registration failed!');
       }
     }
   }
@@ -74,7 +80,9 @@ class LoginViewModel extends ChangeNotifier {
   @override
   void dispose() {
     _usernameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
+
     super.dispose();
   }
 }

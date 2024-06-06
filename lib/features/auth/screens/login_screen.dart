@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wedevs_assignment/common/custom_button.dart';
 import 'package:wedevs_assignment/common/custom_textfield.dart';
+import 'package:wedevs_assignment/features/auth/screens/sign_up_screen.dart';
 
 import 'package:wedevs_assignment/features/auth/viewmodel/login_viewmodel.dart';
 import 'package:wedevs_assignment/features/constants/app_defaults.dart';
@@ -28,7 +29,7 @@ class LoginScreen extends ConsumerWidget {
                 final viewModel = ref.watch(loginViewModelProvider);
 
                 return Form(
-                  key: viewModel.formKey,
+                  key: viewModel.loginKey,
                   child: AutofillGroup(
                     child: Column(
                       children: [
@@ -36,7 +37,7 @@ class LoginScreen extends ConsumerWidget {
                         SvgPicture.asset('assets/app/Dokan Logo.svg'),
                         SizedBox(height: height * 0.1),
                         Text(
-                          "Sign Up",
+                          "Sign In",
                           style: theme.textTheme.headlineSmall?.copyWith(
                             fontWeight: FontWeight.w700,
                           ),
@@ -48,24 +49,7 @@ class LoginScreen extends ConsumerWidget {
                             AutofillHints.email,
                             AutofillHints.username
                           ],
-                          labelText: 'Name',
-                          obSecure: false,
-                          validator: viewModel.validateUsername,
-                          prefixIcon: const IconButton(
-                            onPressed: null,
-                            icon: Icon(
-                              Icons.person,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: height * 0.02),
-                        CustomTextField(
-                          controller: viewModel.usernameController,
-                          autofillHints: const [
-                            AutofillHints.email,
-                            AutofillHints.username
-                          ],
-                          labelText: 'Email',
+                          labelText: 'Username',
                           obSecure: false,
                           validator: viewModel.validateUsername,
                           prefixIcon: const IconButton(
@@ -104,14 +88,27 @@ class LoginScreen extends ConsumerWidget {
                             ),
                           ),
                         ),
+                        SizedBox(height: height * 0.00625),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: Text(
+                              "Forgot Password?",
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ),
                         SizedBox(height: height * 0.05),
                         CustomButton(
                           onTap: () {
-                            if (viewModel.formKey.currentState!.validate()) {
+                            if (viewModel.loginKey.currentState!.validate()) {
                               viewModel.login(ref, context);
                             }
                           },
-                          text: 'Sign Up',
+                          text: 'Log In',
                           height: 60,
                         ),
                         SizedBox(height: height * 0.03),
@@ -127,12 +124,19 @@ class LoginScreen extends ConsumerWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 40),
         child: GestureDetector(
-          onTap: () => context.push('/signup'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SignUpScreen(),
+              ),
+            );
+          },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Already have an account?",
+                "Create New Account",
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w300,
                 ),

@@ -6,7 +6,15 @@ import 'package:wedevs_assignment/features/auth/screens/sign_up_screen.dart';
 import 'package:wedevs_assignment/layouts/layout_screen.dart';
 import 'package:wedevs_assignment/utils/secured_storage_util.dart';
 
+final GlobalKey<NavigatorState> _rootNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'root');
+final GlobalKey<NavigatorState> _loginNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'logNav');
+final GlobalKey<NavigatorState> _signUpNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'signNav');
+
 final GoRouter router = GoRouter(
+  navigatorKey: _rootNavigatorKey,
   routes: <RouteBase>[
     GoRoute(
       path: '/',
@@ -19,7 +27,7 @@ final GoRouter router = GoRouter(
         if (token?.isNotEmpty ?? false) {
           return '/';
         } else {
-          return '/login';
+          return '/signup';
         }
       },
       routes: <RouteBase>[
