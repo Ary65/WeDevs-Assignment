@@ -1,6 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:wedevs_assignment/features/constants/colors.dart';
+import 'package:wedevs_assignment/constants/colors.dart';
 
 class Loader extends StatelessWidget {
   const Loader({super.key});

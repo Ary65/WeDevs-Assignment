@@ -7,8 +7,8 @@ import 'package:wedevs_assignment/common/custom_textfield.dart';
 import 'package:wedevs_assignment/features/auth/screens/login_screen.dart';
 
 import 'package:wedevs_assignment/features/auth/viewmodel/sign_up_viewmodel.dart';
-import 'package:wedevs_assignment/features/constants/app_defaults.dart';
-import 'package:wedevs_assignment/features/constants/colors.dart';
+import 'package:wedevs_assignment/constants/app_defaults.dart';
+import 'package:wedevs_assignment/constants/colors.dart';
 
 class SignUpScreen extends ConsumerWidget {
   const SignUpScreen({super.key});

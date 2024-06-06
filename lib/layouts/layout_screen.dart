@@ -3,7 +3,7 @@ import 'package:awesome_bottom_bar/widgets/inspired/inspired.dart';
 import 'package:flutter/material.dart';
 import 'package:wedevs_assignment/features/home/screens/home_screen.dart';
 import 'package:wedevs_assignment/features/profile/screens/profile_screen.dart';
-import 'package:wedevs_assignment/features/constants/colors.dart';
+import 'package:wedevs_assignment/constants/colors.dart';
 
 final List<Widget> screens = [
   const HomeScreen(),

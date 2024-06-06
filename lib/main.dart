@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wedevs_assignment/routers.dart';
-import 'package:wedevs_assignment/features/constants/colors.dart';
+import 'package:wedevs_assignment/constants/colors.dart';
 import 'package:wedevs_assignment/utils/secured_storage_util.dart';
 
 void main() async {

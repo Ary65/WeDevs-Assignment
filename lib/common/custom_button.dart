@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:wedevs_assignment/features/constants/colors.dart';
+import 'package:wedevs_assignment/constants/colors.dart';
 
 class CustomButton extends StatelessWidget {
   final Function() onTap;
@@ -13,7 +13,7 @@ class CustomButton extends StatelessWidget {
     required this.onTap,
     required this.text,
     this.color = AppColors.primaryColor,
-    this.height = 44,
+    this.height = 50,
   });
 
   @override
