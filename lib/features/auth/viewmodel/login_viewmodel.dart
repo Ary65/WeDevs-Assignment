@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:wedevs_assignment/constants/colors.dart';
 import 'package:wedevs_assignment/features/auth/services/auth_services.dart';
+import 'package:wedevs_assignment/features/profile/view_model/profile_viewmodel.dart';
 import 'package:wedevs_assignment/providers/logged_in_provider.dart';
 import 'package:wedevs_assignment/utils/loader.dart';
 import 'package:wedevs_assignment/utils/secured_storage_util.dart';
-import 'package:wedevs_assignment/utils/snackbar_util.dart';
+import 'package:wedevs_assignment/utils/toast.dart';
 
 final loginViewModelProvider =
     ChangeNotifierProvider((ref) => LoginViewModel());
@@ -61,12 +62,13 @@ class LoginViewModel extends ChangeNotifier {
       if (context.mounted) {
         context.pop(true);
         GoRouter.of(context).pushReplacement('/');
+        ref.invalidate(profileViewModelProvider);
         ref.invalidate(isLoggedInProvider);
-        SnackBarUtil.showSuccessSnackBar(context, 'Login successful!');
+        showToast('Login successful!', AppColors.snackBarColor);
       }
     } else {
       if (context.mounted) {
-        SnackBarUtil.showErrorSnackBar(context, 'Login failed!');
+        showToast('Login failed!', AppColors.dangerColor);
       }
     }
   }

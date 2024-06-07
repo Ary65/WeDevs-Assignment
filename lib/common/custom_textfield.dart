@@ -45,12 +45,9 @@ class CustomTextField extends ConsumerWidget {
         fontWeight: FontWeight.w600,
       ),
       decoration: InputDecoration(
-        // contentPadding: EdgeInsets.all(13),
-
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 0.0, vertical: 16.0),
         suffixIcon: suffixIcon,
-        // prefixIcon: prefixIcon,
         prefixIcon: prefixIcon == null
             ? const SizedBox()
             : Row(
@@ -59,8 +56,8 @@ class CustomTextField extends ConsumerWidget {
                   if (prefixIcon != null) prefixIcon!,
                   if (prefixIcon != null)
                     Container(
-                      width: 1, // Width of the vertical divider
-                      height: 24, // Height of the divider
+                      width: 1,
+                      height: 24,
                       color: Colors.grey,
                       margin: const EdgeInsets.only(right: 8.0),
                     )
@@ -72,20 +69,6 @@ class CustomTextField extends ConsumerWidget {
         labelStyle: const TextStyle(
           fontWeight: FontWeight.w600,
         ),
-        // enabledBorder: const OutlineInputBorder(
-        //   borderRadius: BorderRadius.all(Radius.circular(8)),
-        //   borderSide: BorderSide(
-        //     width: .1,
-        //     color: AppColors.gray,
-        //   ),
-        // ),
-        // focusedBorder: const OutlineInputBorder(
-        //   borderRadius: BorderRadius.all(Radius.circular(10)),
-        //   borderSide: BorderSide(
-        //     width: 1.5,
-        //     color: AppColors.primaryColor,
-        //   ),
-        // ),
       ),
     );
   }

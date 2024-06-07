@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:wedevs_assignment/common/custom_button.dart';
 import 'package:wedevs_assignment/common/custom_textfield.dart';
 import 'package:wedevs_assignment/features/auth/screens/sign_up_screen.dart';
@@ -128,7 +127,7 @@ class LoginScreen extends ConsumerWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SignUpScreen(),
+                builder: (context) => const SignUpScreen(),
               ),
             );
           },

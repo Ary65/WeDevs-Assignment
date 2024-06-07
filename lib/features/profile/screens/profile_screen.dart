@@ -52,14 +52,14 @@ class ProfileScreen extends ConsumerWidget {
                     const SizedBox(height: 40),
                     TextField(
                       controller: TextEditingController(
-                          text: profileViewModel.user!.username),
+                          text: profileViewModel.user?.username),
                       decoration: const InputDecoration(labelText: 'Username'),
                       readOnly: true,
                     ),
                     const SizedBox(height: 20),
                     TextField(
                       controller: TextEditingController(
-                          text: profileViewModel.user!.email),
+                          text: profileViewModel.user?.email),
                       decoration: const InputDecoration(labelText: 'Email'),
                       readOnly: true,
                     ),
@@ -82,7 +82,7 @@ class ProfileScreen extends ConsumerWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(20),
         child: CustomButton(
-          onTap: () => profileViewModel.updateProfile(ref),
+          onTap: () => profileViewModel.updateProfile(ref, context),
           text: 'Update Profile',
         ),
       ),

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:wedevs_assignment/constants/colors.dart';
 import 'package:wedevs_assignment/features/auth/services/auth_services.dart';
 import 'package:wedevs_assignment/utils/loader.dart';
-
-import 'package:wedevs_assignment/utils/snackbar_util.dart';
+import 'package:wedevs_assignment/utils/toast.dart';
 
 final signUpViewModelProvider =
     ChangeNotifierProvider((ref) => SignUpViewModel());
@@ -68,11 +67,11 @@ class SignUpViewModel extends ChangeNotifier {
       if (context.mounted) {
         context.pop(true);
         GoRouter.of(context).pushReplacement('/login');
-        SnackBarUtil.showSuccessSnackBar(context, 'Registration successful!');
+        showToast('Registration successful!', AppColors.snackBarColor);
       }
     } else {
       if (context.mounted) {
-        SnackBarUtil.showErrorSnackBar(context, 'Registration failed!');
+        showToast('Registration failed!', AppColors.dangerColor);
       }
     }
   }

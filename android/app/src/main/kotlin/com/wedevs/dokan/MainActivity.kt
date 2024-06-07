@@ -1,4 +1,4 @@
-package com.example.wedevs_assignment
+package com.wedevs.dokan
 
 import io.flutter.embedding.android.FlutterActivity
 

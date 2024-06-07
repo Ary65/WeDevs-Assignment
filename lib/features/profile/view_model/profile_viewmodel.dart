@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wedevs_assignment/features/auth/services/auth_services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wedevs_assignment/constants/colors.dart';
 import 'package:wedevs_assignment/features/profile/services/profile_services.dart';
 import 'package:wedevs_assignment/models/user_model.dart';
 import 'package:wedevs_assignment/providers/logged_in_provider.dart';
+import 'package:wedevs_assignment/utils/loader.dart';
 import 'package:wedevs_assignment/utils/secured_storage_util.dart';
 import 'package:wedevs_assignment/utils/toast.dart';
 
@@ -38,14 +39,15 @@ class ProfileViewModel extends ChangeNotifier {
         lastNameController.text = userDetails.lastName;
         SecureStorageUtil.setUserId(userDetails.id);
         ref.invalidate(isLoggedInProvider);
-      } else {}
+      }
     }
 
     _isLoading = false;
     notifyListeners();
   }
 
-  Future<void> updateProfile(WidgetRef ref) async {
+  Future<void> updateProfile(WidgetRef ref, BuildContext context) async {
+    LoaderClass.showLoadingDialog(context, 'Updating');
     final token = await SecureStorageUtil.getToken();
     final success = await _profileServices.updateUserProfile(
       token!,
@@ -53,11 +55,13 @@ class ProfileViewModel extends ChangeNotifier {
       lastNameController.text,
     );
     if (success) {
+      if (context.mounted) {
+        context.pop(true);
+      }
       showToast(
         'Profile updated successfully!',
         AppColors.snackBarColor,
       );
-      ref.invalidate(isLoggedInProvider);
     } else {
       showToast(
         'Profile update failed!',

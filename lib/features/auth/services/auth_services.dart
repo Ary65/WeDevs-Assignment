@@ -1,10 +1,8 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wedevs_assignment/constants/base_url.dart';
-import 'package:wedevs_assignment/models/user_model.dart';
 import 'package:wedevs_assignment/providers/logged_in_provider.dart';
 import 'package:wedevs_assignment/utils/secured_storage_util.dart';
 
@@ -90,7 +88,6 @@ class AuthServices {
       return false;
     }
   }
-
 
   Future<void> logOut(WidgetRef ref) async {
     await SecureStorageUtil.deleteToken();

@@ -1,13 +1,14 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:wedevs_assignment/constants/base_url.dart';
+import 'package:wedevs_assignment/constants/dio_config.dart';
 import 'package:wedevs_assignment/models/user_model.dart';
 import 'package:wedevs_assignment/utils/secured_storage_util.dart';
 
 class ProfileServices {
-  final Dio dio = Dio(BaseOptions(followRedirects: true, maxRedirects: 5));
+  // final Dio dio = Dio(BaseOptions(followRedirects: true, maxRedirects: 5));
+  final Dio dio = DioConfig.createDio();
   Future<User?> fetchUserDetails(String token) async {
     try {
       final response = await dio.get(
@@ -17,9 +18,8 @@ class ProfileServices {
             'Authorization': 'Bearer $token',
             'Accept': 'application/json',
           },
-          followRedirects: false, // Disable automatic redirects
-          validateStatus: (status) =>
-              status! < 500, // Validate status for errors
+          followRedirects: false,
+          validateStatus: (status) => status! < 500,
         ),
       );
       debugPrint('fetchUserDetails response: $response');
